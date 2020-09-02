@@ -1,6 +1,12 @@
 function displayTeamDepthChart(t) {
-    dc = document.getElementById('depthchart');
-    dc.innerHTML = t;
+    for (dc of document.getElementsByClassName("depthchart")){
+	dc.style.display = 'none';
+	dc.style.visibility = 'hidden';
+	if (dc.team == t){
+	    dc.style.display = 'table';
+	    dc.style.visibility = 'visible';
+	}
+    }
 }
 
 function selectPlayer(p){
@@ -11,6 +17,7 @@ function selectPlayer(p){
 function addPlayer(p){
     players = document.getElementById('players');
     row = players.insertRow(-1);
+    row.classList.add('playerListEntry');
     row.addEventListener("click",
 			 function() { selectPlayer(p); }
 			)
@@ -20,7 +27,26 @@ function addPlayer(p){
     row.insertCell(-1).innerHTML = p.name;
 }
 
+
+function addDepthChart(dc){
+    var tbl = document.createElement("TABLE");
+    var pos;
+    tbl.team = dc.team;
+    for (pos of (["QB", "RB", "WR", "TE"])) {
+	row = tbl.insertRow(-1);
+	row.insertCell(-1).innerHTML = pos;
+	for (name of dc[pos]) {
+	    row.insertCell(-1).innerHTML = name;
+	}
+    }
+    tbl.style.display = 'none';
+    tbl.style.visibility = 'hidden';
+    tbl.classList.add('depthchart');
+    document.getElementById('s_depthchart').appendChild(tbl);
+}
+
+
 function initializeDraft(){
     playerDataYahoo.forEach(addPlayer);
-    
+    teamDepthCharts.forEach(addDepthChart);
 }
