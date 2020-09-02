@@ -1,3 +1,47 @@
-table {
-    overflow: scroll;
+body {
+    display: grid;
+    grid-template-columns: auto auto;
 }
+
+div {
+    /* display: inline-block; */
+    border-style: solid;
+    width: 45%;
+    max-height: 800px;
+    overflow: auto;
+}
+
+#s_players {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+#s_depthchart {
+    /* height: 45%; */
+    /* float: right; */
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+#s_myteam {
+    /* height: 45%; */
+    /* float: right; */
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+.player {
+
+}
+
+/*
+#players.tr:hover {
+    background-color: #f5f5f5;
+}
+*/
+
+/* @todo: How to make this apply just to a particular table? */
+tr:hover { background-color: #f5f5f5; }
