@@ -12,6 +12,10 @@
 </head>
 <body onload="initializeDraft()">
 
+  <div>
+    <p id="console">Console</p>
+  </div>
+
   <div class="header">
     <label for="playerSearch">Player:</label>
     <input list="playersList" 
@@ -27,6 +31,28 @@
     <datalist id="teamsList">
       <!-- Will be auto-populated -->
     </datalist>
+  </div>
+
+  <div>
+    <input type="button" id="filter_clear" value="All" onclick="filterSelectAll()">
+
+    <label for="qb_filterCheck">QB</label>
+    <input type="checkbox" id="filter_qb" onclick="filterPlayersByPosition()">
+
+    <label for="rb_filterCheck">RB</label>
+    <input type="checkbox" id="filter_rb" onclick="filterPlayersByPosition()">
+
+    <label for="wr_filterCheck">WR</label>
+    <input type="checkbox" id="filter_wr" onclick="filterPlayersByPosition()">
+
+    <label for="te_filterCheck">TE</label>
+    <input type="checkbox" id="filter_te" onclick="filterPlayersByPosition()">
+
+    <label for="dst_filterCheck">DST</label>
+    <input type="checkbox" id="filter_dst" onclick="filterPlayersByPosition()">
+
+    <label for="k_filterCheck">K</label>
+    <input type="checkbox" id="filter_k"  onclick="filterPlayersByPosition()">
   </div>
   
   <div id="s_players" class="left">

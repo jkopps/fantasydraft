@@ -7,16 +7,57 @@ function displayTeamDepthChart(t) {
 	    dc.style.visibility = 'visible';
 	}
     }
+
+    document.getElementById("teamsSearch").value = t;
+}
+
+function filterPlayersByPosition(){
+    document.getElementById('console').innerHTML = "blah";
+
+    filters = {
+	QB:document.getElementById('filter_qb').checked,
+	RB:document.getElementById('filter_rb').checked,
+	WR:document.getElementById('filter_wr').checked,
+	TE:document.getElementById('filter_te').checked,
+	DST:document.getElementById('filter_dst').checked,
+	K:document.getElementById('filter_k').checked
+    }
+
+    players = document.getElementById('players').rows;
+    for (i=0; i < players.length; i++){
+	if (filters[players[i].player.pos]){
+	    players[i].style.visibility = "visible";
+	    players[i].style.display = "table";
+	}
+	else{
+	    players[i].style.visibility = "hidden";
+	    players[i].style.display = "none";
+	}
+    }
+    
+}
+
+function filterSelectAll(){
+    document.getElementById('filter_qb').checked = true;
+    document.getElementById('filter_rb').checked = true;
+    document.getElementById('filter_wr').checked = true;
+    document.getElementById('filter_te').checked = true;
+    document.getElementById('filter_dst').checked = true;
+    document.getElementById('filter_k').checked = true;
+    filterPlayersByPosition();
 }
 
 function selectPlayer(p){
     t = p.team;
     displayTeamDepthChart(t);
+    document.getElementById('playerSearch').value = p.name;
+    
 }
 
 function addPlayer(p){
     players = document.getElementById('players');
     row = players.insertRow(-1);
+    row.player = p;
     row.classList.add('playerListEntry');
     row.addEventListener("click",
 			 function() { selectPlayer(p); }
@@ -30,7 +71,6 @@ function addPlayer(p){
     opt.value = p.name;
     document.getElementById('playersList').appendChild(opt);
 }
-
 
 function addDepthChart(dc){
     var tbl = document.createElement("TABLE");
@@ -53,8 +93,37 @@ function addDepthChart(dc){
     document.getElementById('teamsList').appendChild(opt);
 }
 
+function getPlayerByName(name) {
+    return playerDataYahoo.find(
+				function (value, index, array){ 
+				    return value.name == name; 
+				});
+}
 
 function initializeDraft(){
     playerDataYahoo.forEach(addPlayer);
     teamDepthCharts.forEach(addDepthChart);
+
+
+    var searchBar = document.getElementById('playerSearch');
+
+    searchBar.addEventListener(
+        "select",
+	function (){
+	    selectPlayer(getPlayerByName(
+			     document.getElementById('playerSearch').value));
+	});
+
+    /* @todo: This isn't working */
+    searchBar.addEventListener(
+        "onfocus",
+	function (){
+	    document.getElementById('console').innerHTML = "blah";
+	});
+
+    document.getElementById('teamsSearch')
+	.addEventListener("select", 
+			  function() {
+			      displayTeamDepthChart(document.getElementById('teamsSearch').value);
+			  });
 }
