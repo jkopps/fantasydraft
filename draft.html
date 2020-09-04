@@ -12,18 +12,37 @@
 </head>
 <body onload="initializeDraft()">
 
+  <div class="header">
+    <label for="playerSearch">Player:</label>
+    <input list="playersList" 
+	   id="playerSearch" 
+	   placeholder="Player Name"
+	   size=60>
+    <datalist id="playersList">
+      <!-- Will be auto-populated -->
+    </datalist>
 
-  
-  <div id="s_players">
-    <table id="players"></table>
+    <label for="teamsSearch">Team:</label>
+    <input id="teamsSearch" list="teamsList" size=3>
+    <datalist id="teamsList">
+      <!-- Will be auto-populated -->
+    </datalist>
   </div>
   
-  <div id="s_depthchart">
+  <div id="s_players" class="left">
+    <table id="players"></table>
+  </div>
+
+  <div id="s_playerdetails" class="right">
+    <p>The Player</p>
+  </div>
+  
+  <div id="s_depthchart" class="right">
     <p>Depth Chart</p>
     <!-- <table id="depthchart"></table> -->
   </div>
 
-  <div id="s_myteam">
+  <div id="s_myteam" class="right">
     <p>My Team</p>
     <table id="myteam"></table>
   </div>

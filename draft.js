@@ -25,6 +25,10 @@ function addPlayer(p){
     row.insertCell(-1).innerHTML = p.pos;
     row.insertCell(-1).innerHTML = p.team;
     row.insertCell(-1).innerHTML = p.name;
+
+    opt = document.createElement("OPTION");
+    opt.value = p.name;
+    document.getElementById('playersList').appendChild(opt);
 }
 
 
@@ -43,6 +47,10 @@ function addDepthChart(dc){
     tbl.style.visibility = 'hidden';
     tbl.classList.add('depthchart');
     document.getElementById('s_depthchart').appendChild(tbl);
+
+    opt = document.createElement("OPTION");
+    opt.value = dc.team;
+    document.getElementById('teamsList').appendChild(opt);
 }
 
 

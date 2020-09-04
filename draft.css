@@ -1,36 +1,39 @@
 body {
-    display: grid;
-    grid-template-columns: auto auto;
 }
 
 div {
-    /* display: inline-block; */
     border-style: solid;
-    width: 45%;
-    max-height: 800px;
     overflow: auto;
+    max-height: 600px;
+}
+
+.header {
+	float: top;
+	width: 100%;
+}
+
+.left {
+      float: left;
+      width: 35%;
+      height: 100%;
+}
+
+.right {
+       float: right;
+       width: 60%;
+       height: 30%;
 }
 
 #s_players {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
+
 }
 
 #s_depthchart {
-    /* height: 45%; */
-    /* float: right; */
-    grid-column-start: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
+
 }
 
 #s_myteam {
-    /* height: 45%; */
-    /* float: right; */
-    grid-column-start: 2;
-    grid-row-start: 2;
+
 }
 
 .player {
