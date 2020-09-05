@@ -40,4 +40,20 @@ div {
 
 }
 
-.playerListEntry:hover { background-color: #f5f5f5; }
+
+.drafted {
+    font-color: #f5f5f5;
+}
+
+.playerListEntry:hover {
+    background-color: #f0f0f0;
+    /* font-weight: bold; */
+}
+
+.available {
+
+}
+
+.unavailable {
+    color: #808080;
+}

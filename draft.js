@@ -1,3 +1,5 @@
+var activePlayer;
+
 function displayTeamDepthChart(t) {
     for (dc of document.getElementsByClassName("depthchart")){
 	dc.style.display = 'none';
@@ -47,11 +49,26 @@ function filterSelectAll(){
     filterPlayersByPosition();
 }
 
+function updatePlayerAvailability(){
+    activePlayer.row.classList.toggle('available');
+    activePlayer.row.classList.toggle('unavailable');
+}
+
+function updatePlayerMyTeam(){
+    activePlayer.row.classList.toggle('onmyteam');
+}
+
 function selectPlayer(p){
     t = p.team;
     displayTeamDepthChart(t);
     document.getElementById('playerSearch').value = p.name;
-    
+    activePlayer = p;
+
+    document.getElementById('isAvailableBox').checked = 
+	p.row.classList.contains('available');
+
+    document.getElementById('isOnMyTeamBox').checked = 
+	p.row.classList.contains('onmyteam');
 }
 
 function addPlayer(p){
@@ -67,9 +84,13 @@ function addPlayer(p){
     row.insertCell(-1).innerHTML = p.team;
     row.insertCell(-1).innerHTML = p.name;
 
+    p.row = row;
+
     opt = document.createElement("OPTION");
     opt.value = p.name;
     document.getElementById('playersList').appendChild(opt);
+
+    row.classList.add('available');
 }
 
 function addDepthChart(dc){
@@ -126,4 +147,9 @@ function initializeDraft(){
 			  function() {
 			      displayTeamDepthChart(document.getElementById('teamsSearch').value);
 			  });
+
+    filterSelectAll();
+
+    document.getElementById('isAvailableBox').addEventListener("click", updatePlayerAvailability);
+    document.getElementById('isOnMyTeamBox').addEventListener("click", updatePlayerMyTeam);
 }

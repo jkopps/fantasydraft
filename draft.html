@@ -36,23 +36,23 @@
   <div>
     <input type="button" id="filter_clear" value="All" onclick="filterSelectAll()">
 
-    <label for="qb_filterCheck">QB</label>
     <input type="checkbox" id="filter_qb" onclick="filterPlayersByPosition()">
+    <label for="qb_filterCheck">QB</label>
 
-    <label for="rb_filterCheck">RB</label>
     <input type="checkbox" id="filter_rb" onclick="filterPlayersByPosition()">
+    <label for="rb_filterCheck">RB</label>
 
-    <label for="wr_filterCheck">WR</label>
     <input type="checkbox" id="filter_wr" onclick="filterPlayersByPosition()">
+    <label for="wr_filterCheck">WR</label>
 
-    <label for="te_filterCheck">TE</label>
     <input type="checkbox" id="filter_te" onclick="filterPlayersByPosition()">
+    <label for="te_filterCheck">TE</label>
 
-    <label for="dst_filterCheck">DST</label>
     <input type="checkbox" id="filter_dst" onclick="filterPlayersByPosition()">
+    <label for="dst_filterCheck">DST</label>
 
-    <label for="k_filterCheck">K</label>
     <input type="checkbox" id="filter_k"  onclick="filterPlayersByPosition()">
+    <label for="k_filterCheck">K</label>
   </div>
   
   <div id="s_players" class="left">
@@ -61,6 +61,12 @@
 
   <div id="s_playerdetails" class="right">
     <p>The Player</p>
+
+    <input type="checkbox" id="isAvailableBox">
+    <label for="isAvailableBox">Available</label>
+
+    <input type="checkbox" id="isOnMyTeamBox">
+    <label for="isOnMyTeamBox">On My Team</label>
   </div>
   
   <div id="s_depthchart" class="right">
