@@ -28,8 +28,15 @@ div {
 
 }
 
-#s_depthchart {
+th, td {
+    vertical-align: top;
+}
 
+tr.depthchart {
+    border-bottom: 1px solid black;
+}
+
+#s_depthchart {
 }
 
 #s_myteam {
@@ -55,5 +62,10 @@ div {
 }
 
 .unavailable {
-    color: #808080;
+    color: #c0c0c0;
+}
+
+.hiddenPlayer {
+    visibility: hidden;
+    display: none;
 }

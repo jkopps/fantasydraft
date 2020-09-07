@@ -1,7 +1,7 @@
 var activePlayer;
 
 function displayTeamDepthChart(t) {
-    for (dc of document.getElementsByClassName("depthchart")){
+    for (dc of document.getElementsByClassName("teamdepthchart")){
 	dc.style.display = 'none';
 	dc.style.visibility = 'hidden';
 	if (dc.team == t){
@@ -13,7 +13,7 @@ function displayTeamDepthChart(t) {
     document.getElementById("teamsSearch").value = t;
 }
 
-function filterPlayersByPosition(){
+function filterPlayerList(){
     document.getElementById('console').innerHTML = "blah";
 
     filters = {
@@ -22,31 +22,32 @@ function filterPlayersByPosition(){
 	WR:document.getElementById('filter_wr').checked,
 	TE:document.getElementById('filter_te').checked,
 	DST:document.getElementById('filter_dst').checked,
-	K:document.getElementById('filter_k').checked
+	K:document.getElementById('filter_k').checked,
+	unavailable:document.getElementById('filter_unavailable').checked
     }
 
-    players = document.getElementById('players').rows;
-    for (i=0; i < players.length; i++){
-	if (filters[players[i].player.pos]){
-	    players[i].style.visibility = "visible";
-	    players[i].style.display = "table";
+    for (row of document.getElementById('players').rows){
+	p = row.player;
+	var show = filters[p.pos];
+	if (filters['unavailable'] == false && row.classList.contains("unavailable")){
+	    show = false;
 	}
-	else{
-	    players[i].style.visibility = "hidden";
-	    players[i].style.display = "none";
+	if (show){
+	    row.classList.remove("hiddenPlayer");
+	}
+	else {
+	    row.classList.add("hiddenPlayer");
 	}
     }
     
 }
 
 function filterSelectAll(){
-    document.getElementById('filter_qb').checked = true;
-    document.getElementById('filter_rb').checked = true;
-    document.getElementById('filter_wr').checked = true;
-    document.getElementById('filter_te').checked = true;
-    document.getElementById('filter_dst').checked = true;
-    document.getElementById('filter_k').checked = true;
-    filterPlayersByPosition();
+    for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k', 'unavailable']){
+	id = 'filter_' + pos;
+	document.getElementById(id).checked = true;
+    }
+    filterPlayerList();
 }
 
 function updatePlayerAvailability(){
@@ -56,6 +57,11 @@ function updatePlayerAvailability(){
 
 function updatePlayerMyTeam(){
     activePlayer.row.classList.toggle('onmyteam');
+}
+
+function displayMyTeam(){
+    /** @todo */
+    document.getElementsByClass('onmyteam');
 }
 
 function selectPlayer(p){
@@ -69,6 +75,16 @@ function selectPlayer(p){
 
     document.getElementById('isOnMyTeamBox').checked = 
 	p.row.classList.contains('onmyteam');
+
+    document.getElementById('playerName').innerHTML = p.name;
+
+    document.getElementById('playerRank').innerHTML = 
+	"Rank: " + p.rank + " (avg)</br>Range: " + p.min + "-" + p.max + ".   StdDev: " + p.stddev;
+
+    document.getElementById('playerCategorization').innerHTML = 
+        p.pos + " Tier: " + p.tier + "</br>Value: " + p.value;
+
+    document.getElementById('playerNotes').innerHTML = "Notes: " + p.notes;
 }
 
 function addPlayer(p){
@@ -81,6 +97,7 @@ function addPlayer(p){
 			)
     row.insertCell(-1).innerHTML = p.rank;
     row.insertCell(-1).innerHTML = p.pos;
+    row.insertCell(-1).innerHTML = p.tier;
     row.insertCell(-1).innerHTML = p.team;
     row.insertCell(-1).innerHTML = p.name;
 
@@ -96,17 +113,32 @@ function addPlayer(p){
 function addDepthChart(dc){
     var tbl = document.createElement("TABLE");
     var pos;
+
+    tbl.classList.add('teamdepthchart'); /* for searching */
+    tbl.classList.add('depthchart'); /* for styling */
     tbl.team = dc.team;
+    row = tbl.insertRow(-1);
+    row.classList.add('depthchart');
+    th = document.createElement("TH");
+    th.innerHTML = dc.team;
+    th.classList.add('depthchart');
+    row.appendChild(th);
+
     for (pos of (["QB", "RB", "WR", "TE"])) {
 	row = tbl.insertRow(-1);
-	row.insertCell(-1).innerHTML = pos;
+	row.classList.add('depthchart');
+	th = document.createElement("TH");
+	th.innerHTML = pos;
+	row.appendChild(th);
+	th.classList.add('depthchart');
 	for (name of dc[pos]) {
-	    row.insertCell(-1).innerHTML = name;
+	    cell = row.insertCell(-1);
+	    cell.innerHTML = name;
+	    cell.classList.add('depthchart');
 	}
     }
     tbl.style.display = 'none';
     tbl.style.visibility = 'hidden';
-    tbl.classList.add('depthchart');
     document.getElementById('s_depthchart').appendChild(tbl);
 
     opt = document.createElement("OPTION");
@@ -115,14 +147,14 @@ function addDepthChart(dc){
 }
 
 function getPlayerByName(name) {
-    return playerDataYahoo.find(
+    return playerData.find(
 				function (value, index, array){ 
 				    return value.name == name; 
 				});
 }
 
 function initializeDraft(){
-    playerDataYahoo.forEach(addPlayer);
+    playerData.forEach(addPlayer);
     teamDepthCharts.forEach(addDepthChart);
 
 
@@ -149,6 +181,14 @@ function initializeDraft(){
 			  });
 
     filterSelectAll();
+
+    /* Add player list filtering */
+    for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k', 'unavailable']){
+	id = 'filter_' + pos;
+	document.getElementById(id).addEventListener(
+            "click", 
+	    filterPlayerList);
+    }
 
     document.getElementById('isAvailableBox').addEventListener("click", updatePlayerAvailability);
     document.getElementById('isOnMyTeamBox').addEventListener("click", updatePlayerMyTeam);

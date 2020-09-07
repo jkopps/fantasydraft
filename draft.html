@@ -5,7 +5,7 @@
     
     <link rel="stylesheet" type="text/css" href="./draft.css">
     
-    <script src="./playerDataYahoo.js"></script>
+    <script src="./playerData.js"></script>
     <script src="./teamDepthCharts.js"></script>
     <script src="./draft.js"></script>
   
@@ -36,23 +36,26 @@
   <div>
     <input type="button" id="filter_clear" value="All" onclick="filterSelectAll()">
 
-    <input type="checkbox" id="filter_qb" onclick="filterPlayersByPosition()">
-    <label for="qb_filterCheck">QB</label>
+    <input type="checkbox" id="filter_qb">
+    <label for="filter_qb">QB</label>
 
-    <input type="checkbox" id="filter_rb" onclick="filterPlayersByPosition()">
-    <label for="rb_filterCheck">RB</label>
+    <input type="checkbox" id="filter_rb">
+    <label for="filter_rb">RB</label>
 
-    <input type="checkbox" id="filter_wr" onclick="filterPlayersByPosition()">
-    <label for="wr_filterCheck">WR</label>
+    <input type="checkbox" id="filter_wr">
+    <label for="filter_wr">WR</label>
 
-    <input type="checkbox" id="filter_te" onclick="filterPlayersByPosition()">
-    <label for="te_filterCheck">TE</label>
+    <input type="checkbox" id="filter_te">
+    <label for="filter_te">TE</label>
 
-    <input type="checkbox" id="filter_dst" onclick="filterPlayersByPosition()">
-    <label for="dst_filterCheck">DST</label>
+    <input type="checkbox" id="filter_dst">
+    <label for="filter_dst">DST</label>
 
-    <input type="checkbox" id="filter_k"  onclick="filterPlayersByPosition()">
-    <label for="k_filterCheck">K</label>
+    <input type="checkbox" id="filter_k">
+    <label for="filter_k">K</label>
+
+    <input type="checkbox" id="filter_unavailable">
+    <label for="filter_available">Show unavailable</label>
   </div>
   
   <div id="s_players" class="left">
@@ -60,13 +63,16 @@
   </div>
 
   <div id="s_playerdetails" class="right">
-    <p>The Player</p>
-
     <input type="checkbox" id="isAvailableBox">
     <label for="isAvailableBox">Available</label>
 
     <input type="checkbox" id="isOnMyTeamBox">
     <label for="isOnMyTeamBox">On My Team</label>
+
+    <p id="playerName">The Player</p>
+    <p id="playerRank">Rank</p>
+    <p id="playerCategorization">Categorization</p>
+    <p id="playerNotes">Notes</p>
   </div>
   
   <div id="s_depthchart" class="right">
