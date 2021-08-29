@@ -1,3 +1,4 @@
+import argparse
 import sys
 import csv
 
@@ -37,24 +38,30 @@ teamAbbrevs = {
     }
 
 
-with open("FantasyPros_Fantasy_Football_2020_Depth_Charts.csv") as fh:
+parser = argparse.ArgumentParser(description=
+                                 "Reformat Fantasy Pros depth chart csv file")
+parser.add_argument('filename', help='input csv file')
+args = parser.parse_args()
+filename = args.filename
+
+with open(filename) as fh:
     rdr = csv.reader(fh)
     sys.stdout.write('teamDepthCharts = [\n')
     while True:
         try:
-            team = rdr.next()[0]
-            hdrs = rdr.next()
+            team = next(rdr)[0]
+            hdrs = next(rdr)
         except:
             break
         players = [[] for i in range(4)]
         while True:
-            line = rdr.next()
+            line = next(rdr)
             if len(line) < 2:
                 break
             for i in range(1, len(line), 2):
                 # Ignore rankings
                 if line[i] != "":
-                    players[i/2].append(line[i])
+                    players[int(i/2)].append(line[i])
         out  = '{ team:"%s",\n' % teamAbbrevs[team]
         for i,pos in enumerate(('QB', 'RB', 'WR', 'TE')):
             out += '  %s: [' % pos

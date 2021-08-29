@@ -79,7 +79,7 @@ function selectPlayer(p){
     document.getElementById('playerName').innerHTML = p.name;
 
     document.getElementById('playerRank').innerHTML = 
-	"Rank: " + p.rank + " (avg)</br>Range: " + p.min + "-" + p.max + ".   StdDev: " + p.stddev;
+	"Rank: " + p.rank + " (avg)</br>Range: " + p.best + "-" + p.worst + ".   StdDev: " + p.stddev;
 
     document.getElementById('playerCategorization').innerHTML = 
         p.pos + " Tier: " + p.tier + "</br>Value: " + p.value;
