@@ -55,13 +55,51 @@ function updatePlayerAvailability(){
     activePlayer.row.classList.toggle('unavailable');
 }
 
-function updatePlayerMyTeam(){
-    activePlayer.row.classList.toggle('onmyteam');
+function initMyTeam(){
+    var tbl = document.getElementById('myteam');
+    var pos;
+
+    for (pos of (["QB", "RB", "WR", "TE", "DST", "K"])) {
+	row = tbl.insertRow(-1);
+	row.classList.add('depthchart');
+	th = document.createElement("TH");
+	th.innerHTML = pos;
+	row.appendChild(th);
+	th.classList.add('depthchart');
+    }
 }
 
 function displayMyTeam(){
-    /** @todo */
-    document.getElementsByClass('onmyteam');
+    document.getElementsByClassName('onmyteam');
+
+    var tbl = document.getElementById('myteam');
+    var pos;
+
+    positions = ["QB", "RB", "WR", "TE", "DST", "K"];
+
+    for (let i = 0; i < positions.length; i++) {
+	pos = positions[i];
+	row = tbl.rows[i];
+	while (row.cells.length > 1){
+	    row.deleteCell(-1);
+	}
+    }
+
+    for (p of document.getElementsByClassName('onmyteam')){
+	player = p.player;
+	pos = player.pos;
+	i = positions.indexOf(pos);
+	row = tbl.rows[i];
+	cell = row.insertCell(-1);
+	cell.innerHTML = player.name;
+	cell.classList.add('depthchart');
+    }
+	
+}
+
+function updatePlayerMyTeam(){
+    activePlayer.row.classList.toggle('onmyteam');
+    displayMyTeam();
 }
 
 function selectPlayer(p){
@@ -156,7 +194,7 @@ function getPlayerByName(name) {
 function initializeDraft(){
     playerData.forEach(addPlayer);
     teamDepthCharts.forEach(addDepthChart);
-
+    initMyTeam();
 
     var searchBar = document.getElementById('playerSearch');
 
@@ -174,6 +212,7 @@ function initializeDraft(){
 	    document.getElementById('console').innerHTML = "blah";
 	});
 
+    /** @todo: This isn't working */
     document.getElementById('teamsSearch')
 	.addEventListener("select", 
 			  function() {
