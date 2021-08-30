@@ -91,15 +91,39 @@ function displayMyTeam(){
 	i = positions.indexOf(pos);
 	row = tbl.rows[i];
 	cell = row.insertCell(-1);
-	cell.innerHTML = player.name;
+	cell.innerHTML = player.name + ' (' + teamByes[player.team] + ')';
+	cell.player = player;
 	cell.classList.add('depthchart');
+	cell.classList.add('myteamplayer');
     }
-	
+
+    highlightPlayerOverlap();
 }
 
 function updatePlayerMyTeam(){
     activePlayer.row.classList.toggle('onmyteam');
     displayMyTeam();
+}
+
+function highlightPlayerOverlap(){
+    for (cell of document.getElementsByClassName('myteamplayer')){
+	myPlayer = cell.player;
+	if (myPlayer.pos == activePlayer.pos){
+	    cell.classList.add('activePosition');
+	    document.getElementById('console').innerHTML = "match";
+	}
+	else {
+	    cell.classList.remove('activePosition');
+	    document.getElementById('console').innerHTML = "no match";
+	}
+
+	if (teamByes[myPlayer.team] == teamByes[activePlayer.team]){
+	    cell.classList.add('activeByeWeek');
+	}
+	else {
+	    cell.classList.remove('activeByeWeek');
+	}
+    }
 }
 
 function selectPlayer(p){
@@ -123,6 +147,8 @@ function selectPlayer(p){
         p.pos + " Tier: " + p.tier + "</br>Value: " + p.value;
 
     document.getElementById('playerNotes').innerHTML = "Notes: " + p.notes;
+
+    highlightPlayerOverlap();
 }
 
 function addPlayer(p){
@@ -161,6 +187,9 @@ function addDepthChart(dc){
     th.innerHTML = dc.team;
     th.classList.add('depthchart');
     row.appendChild(th);
+    cell = row.insertCell(-1);
+    cell.innerHTML = 'Bye: ' + teamByes[dc.team];
+    cell.classList.add('depthchart');
 
     for (pos of (["QB", "RB", "WR", "TE"])) {
 	row = tbl.insertRow(-1);

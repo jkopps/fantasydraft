@@ -69,3 +69,11 @@ tr.depthchart {
     visibility: hidden;
     display: none;
 }
+
+.activePosition {
+    font-weight: bold;
+}
+
+.activeByeWeek {
+    color: red;
+}
