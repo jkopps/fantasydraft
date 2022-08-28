@@ -243,7 +243,6 @@ function initializeDraft(){
 
     var searchBar = document.getElementById('playerSearch');
 
-    /** @todo Player name search bar isn't working; should zoom to player */
     searchBar.addEventListener(
         "input",
 	function (){
@@ -252,6 +251,12 @@ function initializeDraft(){
 	    p = getPlayerByName(val);
 	    if (p) {
 		selectPlayer(getPlayerByName(val));
+		rows = document.getElementById('players').rows;
+		height = rows[1].getBoundingClientRect().top -
+		    rows[0].getBoundingClientRect().top;
+		console.log("height:" + height);
+		rank=p.rank;
+		document.getElementById('s_players').scrollTop=height*(rank-10);
 	    }
 	});
 
