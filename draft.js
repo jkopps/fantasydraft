@@ -14,7 +14,7 @@ function displayTeamDepthChart(t) {
 }
 
 function filterPlayerList(){
-    document.getElementById('console').innerHTML = "blah";
+    document.getElementById('console').innerHTML = "filterPlayerList";
 
     filters = {
 	QB:document.getElementById('filter_qb').checked,
@@ -46,6 +46,14 @@ function filterSelectAll(){
     for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k', 'unavailable']){
 	id = 'filter_' + pos;
 	document.getElementById(id).checked = true;
+    }
+    filterPlayerList();
+}
+
+function filterSelectNone(){
+    for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k']){
+	id = 'filter_' + pos;
+	document.getElementById(id).checked = false;
     }
     filterPlayerList();
 }
