@@ -14,7 +14,7 @@ function displayTeamDepthChart(t) {
 }
 
 function filterPlayerList(){
-    document.getElementById('console').innerHTML = "filterPlayerList";
+    console.log("filterPlayerList()");
 
     filters = {
 	QB:document.getElementById('filter_qb').checked,
@@ -118,11 +118,11 @@ function highlightPlayerOverlap(){
 	myPlayer = cell.player;
 	if (myPlayer.pos == activePlayer.pos){
 	    cell.classList.add('activePosition');
-	    document.getElementById('console').innerHTML = "match";
+	    console.log("highlightPlayerOverlap:match");
 	}
 	else {
 	    cell.classList.remove('activePosition');
-	    document.getElementById('console').innerHTML = "no match";
+	    console.log("highlightPlayerOverlap:no match");
 	}
 
 	if (teamByes[myPlayer.team] == teamByes[activePlayer.team]){
@@ -134,7 +134,15 @@ function highlightPlayerOverlap(){
     }
 }
 
+function clearPlayerDisplay(){
+    document.getElementById('playerName').innerHTML = "The Player";
+    document.getElementById('playerRank').innerHTML = "Rank";
+    document.getElementById('playerCategorization').innerHTML = "Categorization";
+    document.getElementById('playerNotes').innerHTML = "Notes";
+}
+
 function selectPlayer(p){
+    console.log("selectPlayer" + p.name);
     t = p.team;
     displayTeamDepthChart(t);
     document.getElementById('playerSearch').value = p.name;
@@ -237,23 +245,20 @@ function initializeDraft(){
 
     /** @todo Player name search bar isn't working; should zoom to player */
     searchBar.addEventListener(
-        "select",
+        "input",
 	function (){
-	    selectPlayer(getPlayerByName(
-			     document.getElementById('playerSearch').value));
+	    val = document.getElementById('playerSearch').value;
+	    console.log("searchbar:input: " + val);
+	    p = getPlayerByName(val);
+	    if (p) {
+		selectPlayer(getPlayerByName(val));
+	    }
 	});
 
-    /* @todo: This isn't working */
-    searchBar.addEventListener(
-        "onfocus",
-	function (){
-	    document.getElementById('console').innerHTML = "blah";
-	});
-
-    /** @todo: This isn't working */
     document.getElementById('teamsSearch')
-	.addEventListener("select", 
+	.addEventListener("input",
 			  function() {
+			      clearPlayerDisplay();
 			      displayTeamDepthChart(document.getElementById('teamsSearch').value);
 			  });
 
