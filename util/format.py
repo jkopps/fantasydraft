@@ -3,11 +3,11 @@ import string
 import sys
 import csv
 
-attrs = ('rank', 'tier', 'name', 'team', 'pos', 'best', 'worst', 'avg', 'stddev', 'value', 'notes')
+attrs = ('rank', 'tier', 'name', 'team', 'pos', 'best', 'worst', 'avg', 'stddev', 'ecrvsadp', 'notes')
 attrsmap = dict(
     zip(
         attrs,
-        ('RK', 'TIERS', 'PLAYER NAME', 'TEAM', 'POS', 'BEST', 'WORST', 'AVG.', 'STD.DEV', 'Value', 'Notes')
+        ('RK', 'TIERS', 'PLAYER NAME', 'TEAM', 'POS', 'BEST', 'WORST', 'AVG.', 'STD.DEV', 'ECR VS. ADP', 'NOTES')
     )
 )
 

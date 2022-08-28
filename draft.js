@@ -144,7 +144,7 @@ function selectPlayer(p){
 	"Rank: " + p.rank + " (avg)</br>Range: " + p.best + "-" + p.worst + ".   StdDev: " + p.stddev;
 
     document.getElementById('playerCategorization').innerHTML = 
-        p.pos + " Tier: " + p.tier + "</br>Value: " + p.value;
+        p.pos + " Tier: " + p.tier + "</br>ECR vs ADP: " + p.ecrvsadp;
 
     document.getElementById('playerNotes').innerHTML = "Notes: " + p.notes;
 
@@ -227,6 +227,7 @@ function initializeDraft(){
 
     var searchBar = document.getElementById('playerSearch');
 
+    /** @todo Player name search bar isn't working; should zoom to player */
     searchBar.addEventListener(
         "select",
 	function (){
@@ -261,3 +262,6 @@ function initializeDraft(){
     document.getElementById('isAvailableBox').addEventListener("click", updatePlayerAvailability);
     document.getElementById('isOnMyTeamBox').addEventListener("click", updatePlayerMyTeam);
 }
+
+/** @todo Organize players by tiers, or do highlighting in player list */
+/** @todo Easier filtration by positions */

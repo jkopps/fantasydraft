@@ -34,7 +34,7 @@ teamAbbrevs = {
     "San Francisco 49ers" : "SF",
     "Tampa Bay Buccaneers" : "TB",
     "Tennessee Titans" : "TEN",
-    "Washington Football Team" : "WAS"
+    "Washington Commanders" : "WAS"
     }
 
 
