@@ -78,6 +78,7 @@ function initMyTeam(){
 }
 
 function displayMyTeam(){
+    console.log('displayMyTeam()')
     document.getElementsByClassName('onmyteam');
 
     var tbl = document.getElementById('myteam');
@@ -105,6 +106,18 @@ function displayMyTeam(){
 	cell.classList.add('myteamplayer');
     }
 
+    if (!activePlayer.row.classList.contains('onmyteam')) {
+        player = activePlayer;
+        pos = player.pos;
+        i = positions.indexOf(pos);
+        row = tbl.rows[i];
+        cell = row.insertCell(-1); /** @todo: this should insert according to rank */
+        cell.innerHTML = player.name + ' (' + teamByes[player.team] + ')';
+        cell.player = player;
+        cell.classList.add('depthchart');
+        cell.classList.add('prospectiveteamplayer');
+    }
+
     highlightPlayerOverlap();
 }
 
@@ -114,6 +127,11 @@ function updatePlayerMyTeam(){
 }
 
 function highlightPlayerOverlap(){
+
+    if (activePlayer.row.classList.contains('onmyteam')) {
+        return ;
+    }
+
     for (cell of document.getElementsByClassName('myteamplayer')){
 	myPlayer = cell.player;
 	if (myPlayer.pos == activePlayer.pos){
@@ -164,7 +182,7 @@ function selectPlayer(p){
 
     document.getElementById('playerNotes').innerHTML = "Notes: " + p.notes;
 
-    highlightPlayerOverlap();
+    displayMyTeam();
 }
 
 function addPlayer(p){
@@ -283,3 +301,4 @@ function initializeDraft(){
 
 /** @todo Organize players by tiers, or do highlighting in player list */
 /** @todo Easier filtration by positions */
+/** @todo Show selected player in my team before drafting */
