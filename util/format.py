@@ -4,6 +4,7 @@ import sys
 import csv
 
 attrs = ('rank', 'tier', 'name', 'team', 'pos', 'best', 'worst', 'avg', 'stddev', 'ecrvsadp', 'notes')
+numerics = set(['rank', 'tier', 'best', 'worst', 'avg', 'stddev'])
 attrsmap = dict(
     zip(
         attrs,
@@ -30,7 +31,10 @@ with open(filename, 'r', newline=None) as fh:
         playerData['pos'] = playerData['pos'].strip(string.digits)
         entry = '{'
         for attr in attrs:
-            entry += '%s:"%s",' % (attr, playerData[attr])
+            if attr in numerics:
+                entry += '%s:%s,' % (attr, playerData[attr])
+            else:
+                entry += '%s:"%s",' % (attr, playerData[attr])
         entry += '},'
         sys.stdout.write(entry + '\n')
     sys.stdout.write(']\n')

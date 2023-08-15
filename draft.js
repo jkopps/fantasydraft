@@ -14,7 +14,6 @@ function displayTeamDepthChart(t) {
 }
 
 function filterPlayerList(){
-    console.log("filterPlayerList()");
 
     filters = {
 	QB:document.getElementById('filter_qb').checked,
@@ -78,7 +77,6 @@ function initMyTeam(){
 }
 
 function displayMyTeam(){
-    console.log('displayMyTeam()')
     document.getElementsByClassName('onmyteam');
 
     var tbl = document.getElementById('myteam');
@@ -89,9 +87,10 @@ function displayMyTeam(){
     for (let i = 0; i < positions.length; i++) {
 	pos = positions[i];
 	row = tbl.rows[i];
-	while (row.cells.length > 1){
+	while (row.cells.length > 1){ /** need one cell to make row display */
 	    row.deleteCell(-1);
 	}
+        row.cells[0].player = null;
     }
 
     for (p of document.getElementsByClassName('onmyteam')){
@@ -111,7 +110,11 @@ function displayMyTeam(){
         pos = player.pos;
         i = positions.indexOf(pos);
         row = tbl.rows[i];
-        cell = row.insertCell(-1); /** @todo: this should insert according to rank */
+        i = 1;
+        while (i < row.cells.length && player.rank > row.cells[i].player.rank) {
+            i += 1;
+        }
+        cell = row.insertCell(i); 
         cell.innerHTML = player.name + ' (' + teamByes[player.team] + ')';
         cell.player = player;
         cell.classList.add('depthchart');
@@ -136,11 +139,9 @@ function highlightPlayerOverlap(){
 	myPlayer = cell.player;
 	if (myPlayer.pos == activePlayer.pos){
 	    cell.classList.add('activePosition');
-	    console.log("highlightPlayerOverlap:match");
 	}
 	else {
 	    cell.classList.remove('activePosition');
-	    console.log("highlightPlayerOverlap:no match");
 	}
 
 	if (teamByes[myPlayer.team] == teamByes[activePlayer.team]){
@@ -301,4 +302,3 @@ function initializeDraft(){
 
 /** @todo Organize players by tiers, or do highlighting in player list */
 /** @todo Easier filtration by positions */
-/** @todo Show selected player in my team before drafting */
