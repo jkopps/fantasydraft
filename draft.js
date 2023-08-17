@@ -191,6 +191,11 @@ function addPlayer(p){
     row = players.insertRow(-1);
     row.player = p;
     row.classList.add('playerListEntry');
+	if ((p.tier % 2) == 0) {
+		row.classList.add('eventier');
+	} else {
+		row.classList.add('oddtier');
+	}
     row.addEventListener("click",
 			 function() { selectPlayer(p); }
 			)
@@ -300,5 +305,4 @@ function initializeDraft(){
     document.getElementById('isOnMyTeamBox').addEventListener("click", updatePlayerMyTeam);
 }
 
-/** @todo Organize players by tiers, or do highlighting in player list */
 /** @todo Easier filtration by positions */
