@@ -85,3 +85,7 @@ tr.depthchart {
 .eventier {
     background-color: #f0f0f0
 }
+
+.inactive {
+	opacity: 0.6;
+}

@@ -16,13 +16,13 @@ function displayTeamDepthChart(t) {
 function filterPlayerList(){
 
     filters = {
-	QB:document.getElementById('filter_qb').checked,
-	RB:document.getElementById('filter_rb').checked,
-	WR:document.getElementById('filter_wr').checked,
-	TE:document.getElementById('filter_te').checked,
-	DST:document.getElementById('filter_dst').checked,
-	K:document.getElementById('filter_k').checked,
-	unavailable:document.getElementById('filter_unavailable').checked
+		QB:!document.getElementById('filter_qb').classList.contains('inactive'),
+		RB:!document.getElementById('filter_rb').classList.contains('inactive'),
+		WR:!document.getElementById('filter_wr').classList.contains('inactive'),
+		TE:!document.getElementById('filter_te').classList.contains('inactive'),
+		DST:!document.getElementById('filter_dst').classList.contains('inactive'),
+		K:!document.getElementById('filter_k').classList.contains('inactive'),
+		unavailable:document.getElementById('filter_unavailable').checked
     }
 
     for (row of document.getElementById('players').rows){
@@ -43,16 +43,34 @@ function filterPlayerList(){
 
 function filterSelectAll(){
     for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k', 'unavailable']){
-	id = 'filter_' + pos;
-	document.getElementById(id).checked = true;
+		id = 'filter_' + pos;
+		document.getElementById(id).classList.remove('inactive');
     }
     filterPlayerList();
 }
 
+function filterSelectOne(showPos){
+    for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k']){
+		id = 'filter_' + pos;
+		if (pos == showPos) {
+			document.getElementById(id).classList.remove('inactive');
+		} else {
+			document.getElementById(id).classList.add('inactive');
+		}
+    }
+    filterPlayerList();
+}
+
+function filterToggle(pos){
+	id = 'filter_' + pos;
+	document.getElementById(id).classList.toggle('inactive');
+	filterPlayerList();
+}
+
 function filterSelectNone(){
     for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k']){
-	id = 'filter_' + pos;
-	document.getElementById(id).checked = false;
+		id = 'filter_' + pos;
+		document.getElementById(id).classList.add('inactive');
     }
     filterPlayerList();
 }
@@ -294,15 +312,23 @@ function initializeDraft(){
     filterSelectAll();
 
     /* Add player list filtering */
-    for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k', 'unavailable']){
-	id = 'filter_' + pos;
-	document.getElementById(id).addEventListener(
-            "click", 
-	    filterPlayerList);
-    }
+	document.getElementById('filter_qb').addEventListener("click", function () { filterToggle('qb'); });
+	document.getElementById('filter_rb').addEventListener("click", function () { filterToggle('rb'); });
+	document.getElementById('filter_wr').addEventListener("click", function () { filterToggle('wr'); });
+	document.getElementById('filter_te').addEventListener("click", function () { filterToggle('te'); });
+	document.getElementById('filter_dst').addEventListener("click", function () { filterToggle('dst'); });
+	document.getElementById('filter_k').addEventListener("click", function () { filterToggle('k'); });
 
+	document.getElementById('filter_qb').addEventListener("dblclick", function () { filterSelectOne('qb'); });
+	document.getElementById('filter_rb').addEventListener("dblclick", function () { filterSelectOne('rb'); });
+	document.getElementById('filter_wr').addEventListener("dblclick", function () { filterSelectOne('wr'); });
+	document.getElementById('filter_te').addEventListener("dblclick", function () { filterSelectOne('te'); });
+	document.getElementById('filter_dst').addEventListener("dblclick", function () { filterSelectOne('dst'); });
+	document.getElementById('filter_k').addEventListener("dblclick", function () { filterSelectOne('k'); });
+
+	document.getElementById('filter_unavailable').addEventListener("click", filterPlayerList);
     document.getElementById('isAvailableBox').addEventListener("click", updatePlayerAvailability);
     document.getElementById('isOnMyTeamBox').addEventListener("click", updatePlayerMyTeam);
 }
 
-/** @todo Easier filtration by positions */
+/** @todo Show Unavailable players not removed when Show Unavailable not checked */
