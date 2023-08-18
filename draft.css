@@ -73,6 +73,10 @@ tr.depthchart {
     display: none;
 }
 
+.selectedPlayer {
+	font-weight: bold;
+}
+
 .activePosition {
     font-weight: bold;
 }

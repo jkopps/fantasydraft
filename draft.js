@@ -185,6 +185,12 @@ function selectPlayer(p){
     document.getElementById('playerSearch').value = p.name;
     activePlayer = p;
 
+	coll = 	document.getElementsByClassName('selectedPlayer');
+	for (let i=0; i < coll.length; i++) {
+		coll[i].classList.remove('selectedPlayer');
+	}
+	p.row.classList.add('selectedPlayer');
+
     document.getElementById('isAvailableBox').checked = 
 	p.row.classList.contains('available');
 
