@@ -14,19 +14,20 @@
 </head>
 <body onload="initializeDraft()">
 
+  <section class="left">
   <div class="header">
     <label for="playerSearch">Player:</label>
     <input list="playersList" 
 	   id="playerSearch" 
 	   placeholder="Player Name"
 	   type="search"
-	   size=60>
+	   size=40>
     <datalist id="playersList">
       <!-- Will be auto-populated -->
     </datalist>
 
     <label for="teamsSearch">Team:</label>
-    <input id="teamsSearch" list="teamsList" size=3>
+    <input id="teamsSearch" list="teamsList" size=9>
     <datalist id="teamsList">
       <!-- Will be auto-populated -->
     </datalist>
@@ -47,11 +48,13 @@
     <label for="filter_available">Show unavailable</label>
   </div>
   
-  <div id="s_players" class="left">
+  <div id="s_players">
     <table id="players"></table>
   </div>
-
-  <div id="s_playerdetails" class="right">
+  </section>
+  
+  <section class="right">
+  <div id="s_playerdetails">
     <input type="checkbox" id="isAvailableBox">
     <label for="isAvailableBox">Available</label>
 
@@ -64,15 +67,16 @@
     <p id="playerNotes">Notes</p>
   </div>
   
-  <div id="s_depthchart" class="right">
+  <div id="s_depthchart">
     <p>Depth Chart</p>
     <!-- <table id="depthchart"></table> -->
   </div>
 
-  <div id="s_myteam" class="right">
+  <div id="s_myteam">
     <p>My Team</p>
     <table id="myteam"></table>
   </div>
+  </section>
 </body>
 
 </html> 

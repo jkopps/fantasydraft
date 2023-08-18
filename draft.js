@@ -238,37 +238,51 @@ function addDepthChart(dc){
 
     tbl.classList.add('teamdepthchart'); /* for searching */
     tbl.classList.add('depthchart'); /* for styling */
-    tbl.team = dc.team;
     row = tbl.insertRow(-1);
     row.classList.add('depthchart');
     th = document.createElement("TH");
-    th.innerHTML = dc.team;
     th.classList.add('depthchart');
     row.appendChild(th);
     cell = row.insertCell(-1);
-    cell.innerHTML = 'Bye: ' + teamByes[dc.team];
     cell.classList.add('depthchart');
 
-    for (pos of (["QB", "RB", "WR", "TE"])) {
-	row = tbl.insertRow(-1);
-	row.classList.add('depthchart');
-	th = document.createElement("TH");
-	th.innerHTML = pos;
-	row.appendChild(th);
-	th.classList.add('depthchart');
-	for (name of dc[pos]) {
-	    cell = row.insertCell(-1);
-	    cell.innerHTML = name;
-	    cell.classList.add('depthchart');
+	if (dc != null) {
+		tbl.team = dc.team;
+		th.innerHTML = dc.team;
+		cell.innerHTML = 'Bye: ' + teamByes[dc.team];
+	} else {
+		tbl.team = null;
+		th.innerHTML = "Team";
+		cell.innerHTML = 'Bye: ';
 	}
-    }
-    tbl.style.display = 'none';
-    tbl.style.visibility = 'hidden';
-    document.getElementById('s_depthchart').appendChild(tbl);
 
-    opt = document.createElement("OPTION");
-    opt.value = dc.team;
-    document.getElementById('teamsList').appendChild(opt);
+    for (pos of (["QB", "RB", "WR", "TE"])) {
+		row = tbl.insertRow(-1);
+		row.classList.add('depthchart');
+		th = document.createElement("TH");
+		th.innerHTML = pos;
+		row.appendChild(th);
+		th.classList.add('depthchart');
+
+		if (dc != null) {
+			for (name of dc[pos]) {
+				cell = row.insertCell(-1);
+				cell.innerHTML = name;
+				cell.classList.add('depthchart');
+			}
+		}
+    }
+
+	if (dc != null) {
+		opt = document.createElement("OPTION");
+		opt.value = dc.team;
+		document.getElementById('teamsList').appendChild(opt);
+	
+		tbl.style.display = 'none';
+		tbl.style.visibility = 'hidden';
+	}
+
+    document.getElementById('s_depthchart').appendChild(tbl);
 }
 
 function getPlayerByName(name) {
@@ -280,6 +294,7 @@ function getPlayerByName(name) {
 
 function initializeDraft(){
     playerData.forEach(addPlayer);
+	addDepthChart(null);
     teamDepthCharts.forEach(addDepthChart);
     initMyTeam();
 
