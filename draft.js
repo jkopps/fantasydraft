@@ -179,6 +179,10 @@ function clearPlayerDisplay(){
 }
 
 function selectPlayer(p){
+
+	/* do this now so, if previously selected player became unavailable, he'll be removed from list */
+	filterPlayerList(); 
+	
     console.log("selectPlayer" + p.name);
     t = p.team;
     displayTeamDepthChart(t);
@@ -358,5 +362,3 @@ function initializeDraft(){
     document.getElementById('isAvailableBox').addEventListener("click", updatePlayerAvailability);
     document.getElementById('isOnMyTeamBox').addEventListener("click", updatePlayerMyTeam);
 }
-
-/** @todo Show Unavailable players not removed when Show Unavailable not checked */
