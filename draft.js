@@ -256,6 +256,8 @@ function addDepthChart(dc){
 		cell.innerHTML = 'Bye: ';
 	}
 
+	numToDisplay = {QB:1, RB:4, WR:5, TE:2};
+
     for (pos of (["QB", "RB", "WR", "TE"])) {
 		row = tbl.insertRow(-1);
 		row.classList.add('depthchart');
@@ -265,7 +267,12 @@ function addDepthChart(dc){
 		th.classList.add('depthchart');
 
 		if (dc != null) {
+			let i = 0;
 			for (name of dc[pos]) {
+				if (i >= numToDisplay[pos]) {
+					break;
+				}
+				i += 1;
 				cell = row.insertCell(-1);
 				cell.innerHTML = name;
 				cell.classList.add('depthchart');
