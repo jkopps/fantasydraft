@@ -35,8 +35,6 @@
 
   <div>
     <input type="button" id="filter_clear" value="All" onclick="filterSelectAll()">
-    <input type="button" id="filter_none" value="None" onclick="filterSelectNone()">
-
 	<button id='filter_qb' type="button">QB</button>
 	<button id='filter_rb' type="button">RB</button>
 	<button id='filter_wr' type="button">WR</button>
@@ -54,13 +52,10 @@
   </section>
   
   <section class="right">
-  <div id="s_playerdetails">
-    <input type="checkbox" id="isAvailableBox">
-    <label for="isAvailableBox">Available</label>
-
-    <input type="checkbox" id="isOnMyTeamBox">
-    <label for="isOnMyTeamBox">On My Team</label>
-
+	<div id="s_playerdetails">
+	  <button id='isAvailable' type='button'>Available</button>
+	  <button id='isOnMyTeam' type='button'>On My Team</button>
+	  
     <p id="playerName">The Player</p>
     <p id="playerRank">Rank</p>
     <p id="playerCategorization">Categorization</p>

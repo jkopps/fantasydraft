@@ -67,17 +67,11 @@ function filterToggle(pos){
 	filterPlayerList();
 }
 
-function filterSelectNone(){
-    for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k']){
-		id = 'filter_' + pos;
-		document.getElementById(id).classList.add('inactive');
-    }
-    filterPlayerList();
-}
-
 function updatePlayerAvailability(){
     activePlayer.row.classList.toggle('available');
     activePlayer.row.classList.toggle('unavailable');
+	document.getElementById('isAvailable').classList.toggle('active');
+	document.getElementById('isAvailable').classList.toggle('inactive');
 }
 
 function initMyTeam(){
@@ -144,6 +138,8 @@ function displayMyTeam(){
 
 function updatePlayerMyTeam(){
     activePlayer.row.classList.toggle('onmyteam');
+	document.getElementById('isOnMyTeam').classList.toggle('active');
+	document.getElementById('isOnMyTeam').classList.toggle('inactive');
     displayMyTeam();
 }
 
@@ -195,11 +191,19 @@ function selectPlayer(p){
 	}
 	p.row.classList.add('selectedPlayer');
 
-    document.getElementById('isAvailableBox').checked = 
-	p.row.classList.contains('available');
+	if (p.row.classList.contains('available')) {
+		console.log('Setting available active');
+		document.getElementById('isAvailable').classList.remove('inactive');
+	} else {
+		console.log('Setting available inactive');
+		document.getElementById('isAvailable').classList.add('inactive');
+	}
 
-    document.getElementById('isOnMyTeamBox').checked = 
-	p.row.classList.contains('onmyteam');
+	if (p.row.classList.contains('onmyteam')) {
+		document.getElementById('isOnMyTeam').classList.remove('inactive');
+	} else {
+		document.getElementById('isOnMyTeam').classList.add('inactive');
+	}
 
     document.getElementById('playerName').innerHTML = p.name;
 
@@ -359,6 +363,6 @@ function initializeDraft(){
 	document.getElementById('filter_k').addEventListener("dblclick", function () { filterSelectOne('k'); });
 
 	document.getElementById('filter_unavailable').addEventListener("click", filterPlayerList);
-    document.getElementById('isAvailableBox').addEventListener("click", updatePlayerAvailability);
-    document.getElementById('isOnMyTeamBox').addEventListener("click", updatePlayerMyTeam);
+    document.getElementById('isAvailable').addEventListener("click", updatePlayerAvailability);
+    document.getElementById('isOnMyTeam').addEventListener("click", updatePlayerMyTeam);
 }
