@@ -10,6 +10,8 @@ function displayTeamDepthChart(t) {
 	}
     }
 
+	document.getElementById("teamName").innerHTML = t;
+	document.getElementById("teamBye").innerHTML = teamByes[t];
     document.getElementById("teamsSearch").value = t;
 }
 
@@ -169,9 +171,13 @@ function highlightPlayerOverlap(){
 
 function clearPlayerDisplay(){
     document.getElementById('playerName').innerHTML = "The Player";
-    document.getElementById('playerRank').innerHTML = "Rank";
-    document.getElementById('playerCategorization').innerHTML = "Categorization";
-    document.getElementById('playerNotes').innerHTML = "Notes";
+    document.getElementById('playerRank').innerHTML = "###";
+	document.getElementById('playerHigh').innerHTML = "###";
+	document.getElementById('playerLow').innerHTML = "###";
+	document.getElementById('playerStdDev').innerHTML = "##.#"
+	/* document.getElementById('playerEcrAdp').innerHTML = "##"; */
+	document.getElementById('playerTier').innerHTML = "##";
+    document.getElementById('playerNotes').innerHTML = "";
 }
 
 function selectPlayer(p){
@@ -206,14 +212,14 @@ function selectPlayer(p){
 	}
 
     document.getElementById('playerName').innerHTML = p.name;
-
-    document.getElementById('playerRank').innerHTML = 
-	"Rank: " + p.rank + " (avg)</br>Range: " + p.best + "-" + p.worst + ".   StdDev: " + p.stddev;
-
-    document.getElementById('playerCategorization').innerHTML = 
-        p.pos + " Tier: " + p.tier + "</br>ECR vs ADP: " + p.ecrvsadp;
-
-    document.getElementById('playerNotes').innerHTML = "Notes: " + p.notes;
+	document.getElementById('playerTeam').innerHTML = p.team;
+    document.getElementById('playerRank').innerHTML = p.rank;
+	document.getElementById('playerHigh').innerHTML = p.best;
+	document.getElementById('playerLow').innerHTML = p.worst;
+	document.getElementById('playerStdDev').innerHTML = p.stddev;
+	/* document.getElementById('playerEcrAdp').innerHTML = p.ecrvsadp; */
+	document.getElementById('playerTier').innerHTML = p.tier;
+    document.getElementById('playerNotes').innerHTML = p.notes;
 
     displayMyTeam();
 }
@@ -252,24 +258,11 @@ function addDepthChart(dc){
 
     tbl.classList.add('teamdepthchart'); /* for searching */
     tbl.classList.add('depthchart'); /* for styling */
-    row = tbl.insertRow(-1);
-    row.classList.add('depthchart');
-    th = document.createElement("TH");
-    th.classList.add('depthchart');
-    row.appendChild(th);
-    cell = row.insertCell(-1);
-	cell.innerHTML = 'Depth Chart';
-	cell = row.insertCell(-1);
-    cell.classList.add('depthchart');
 
 	if (dc != null) {
 		tbl.team = dc.team;
-		th.innerHTML = dc.team
-		cell.innerHTML = 'Bye: Week ' + teamByes[dc.team];
 	} else {
 		tbl.team = null;
-		th.innerHTML = "Team";
-		cell.innerHTML = 'Bye: ';
 	}
 
 	numToDisplay = {QB:1, RB:4, WR:5, TE:2};
@@ -385,3 +378,4 @@ function initializeDraft(){
 
 /** @todo Reorganize player details pane to make more room for notes */
 /** @todo Add tier bars in player list */
+/** @todo Scroll to player does not account for which ranks are displayed */

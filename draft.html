@@ -55,20 +55,32 @@
 	<div id="s_playerdetails" class="flex-more">
 	  <button id='isAvailable' type='button'>Available</button>
 	  <button id='isOnMyTeam' type='button'>On My Team</button>
+
+	  <p><i id="playerName">The Player</i> <i id="playerTeam">###</i></p>
+	  <p>
+		Ranked <i id="playerRank"></i> (avg).
+		High: <i id="playerHigh"></i>,
+		Low: <i id="playerLow"></i>,
+		StdDev: <i id="playerStdDev"></i>
+		<br>
+		Tier: <i id="playerTier"></i> (overall)
+        <!-- ECR vs ADP: <i id="playerEcrAdp"></i> -->
+      </p>
+	  </table>
+
+
 	  
-    <p id="playerName">The Player</p>
-    <p id="playerRank">Rank</p>
-    <p id="playerCategorization">Categorization</p>
-    <p id="playerNotes">Notes</p>
+	  <p id="playerNotes">Notes</p>
   </div>
   
-  <div id="s_depthchart" class="flex-less">
+<div id="s_depthchart" class="flex-less">
+  <header><i id="teamName">Depth Chart</i> - Bye Week <i id="teamBye"></i></header>
 	<!-- charts generated programatically -->
   </div>
 
   <div id="s_myteam" class="flex-less">
-    <p>My Team</p>
-    <table id="myteam"></table>
+    <header>My Team</header>
+    <table id="myteam" class="depthchart"></table>
   </div>
   </section>
 </body>

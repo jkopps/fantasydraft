@@ -57,6 +57,14 @@ th, td {
     vertical-align: top;
 }
 
+table {
+}
+
+th.depthchart, td.depthchart {
+	padding: 4px 6px 4px 6px;
+}
+	
+
 tr.depthchart {
     border-bottom: 1px solid black;
 }
@@ -106,4 +114,21 @@ tr.depthchart {
 
 .inactive {
 	opacity: 0.6;
+}
+
+i {
+	font-style: normal;
+	font-weight: bold;
+}
+
+header {
+	font-size: small;
+	border-bottom: 1px solid black;
+	padding-bottom: 4px;
+	margin-bottom: 8px;
+}
+
+#playerName {
+	font-size: x-large;
+	padding-right: 8px;
 }
