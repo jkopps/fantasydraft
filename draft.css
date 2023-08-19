@@ -1,11 +1,18 @@
+body {
+	margin: 0;
+}
+
 section {
-	height: 100vh;
+	height: 99vh;
+	margin: 8px 2px 8px 2px;
+
 }
 
 div {
     border-style: solid;
 	padding: 10px;
 	overflow: auto;
+	margin: 2px 0 2px 0;
 }
 
 .flex-container-row, .flex-container-col {
