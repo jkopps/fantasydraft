@@ -1,4 +1,5 @@
 var activePlayer;
+var positionRanks = {};
 
 function displayTeamDepthChart(t) {
     for (dc of document.getElementsByClassName("teamdepthchart")){
@@ -231,18 +232,23 @@ function selectPlayer(p){
 
     document.getElementById('playerName').innerHTML = p.name;
 	document.getElementById('playerTeam').innerHTML = p.team;
+	document.getElementById('playerPosition').innerHTML = p.pos;
     document.getElementById('playerRank').innerHTML = p.rank;
+	document.getElementById('positionRank').innerHTML = p.posrank;
 	document.getElementById('playerHigh').innerHTML = p.best;
 	document.getElementById('playerLow').innerHTML = p.worst;
 	document.getElementById('playerStdDev').innerHTML = p.stddev;
 	/* document.getElementById('playerEcrAdp').innerHTML = p.ecrvsadp; */
-	document.getElementById('playerTier').innerHTML = p.tier;
+	/* document.getElementById('playerTier').innerHTML = p.tier; */
     document.getElementById('playerNotes').innerHTML = p.notes;
 
     displayMyTeam();
 }
 
 function addPlayer(p){
+	positionRanks[p.pos] += 1;
+	p.posrank = positionRanks[p.pos];
+	
     players = document.getElementById('players');
     row = players.insertRow(-1);
     row.player = p;
@@ -257,7 +263,8 @@ function addPlayer(p){
 			)
     row.insertCell(-1).innerHTML = p.rank;
     row.insertCell(-1).innerHTML = p.pos;
-    row.insertCell(-1).innerHTML = p.tier;
+	row.insertCell(-1).innerHTML = p.posrank;
+    /* row.insertCell(-1).innerHTML = p.tier; */
     row.insertCell(-1).innerHTML = p.team;
     row.insertCell(-1).innerHTML = p.name;
 
@@ -345,6 +352,9 @@ function scrollToPlayer(p) {
 }
 
 function initializeDraft(){
+	for (let pos of ["QB", "RB", "WR", "TE", "DST", "K"]) {
+		positionRanks[pos] = 0;
+	}
     playerData.forEach(addPlayer);
 	addDepthChart(null);
     teamDepthCharts.forEach(addDepthChart);
@@ -396,4 +406,3 @@ function initializeDraft(){
 
 /** @todo Add tier bars in player list */
 /** @todo Scroll to player does not account for which ranks are displayed */
-/** @todo Compute within-position rankings */
