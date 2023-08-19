@@ -132,3 +132,7 @@ header {
 	font-size: x-large;
 	padding-right: 8px;
 }
+
+.waits {
+	display: none;
+}

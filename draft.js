@@ -182,6 +182,24 @@ function clearPlayerDisplay(){
 
 function selectPlayer(p){
 
+	let toHide = document.getElementsByClassName("placeholder");
+	for (let i=0; i < toHide.length; i++) {
+		toHide[i].style.display = "none";
+	}
+
+	while (true) {
+		/* Don't know why this doesn't get them all the first call */
+		let toShow = document.getElementsByClassName("waits");
+		if (toShow.length == 0) {
+			break;
+		}
+		for (let i=0; i < toShow.length; i++) {
+			console.log("popping a waits");
+			/* toShow[i].style.display = "initial"; */
+			toShow[i].classList.remove("waits");
+		}
+	}
+	
 	/* do this now so, if previously selected player became unavailable, he'll be removed from list */
 	filterPlayerList(); 
 	
@@ -376,6 +394,6 @@ function initializeDraft(){
     document.getElementById('isOnMyTeam').addEventListener("click", updatePlayerMyTeam);
 }
 
-/** @todo Reorganize player details pane to make more room for notes */
 /** @todo Add tier bars in player list */
 /** @todo Scroll to player does not account for which ranks are displayed */
+/** @todo Compute within-position rankings */
