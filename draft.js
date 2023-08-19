@@ -258,12 +258,14 @@ function addDepthChart(dc){
     th.classList.add('depthchart');
     row.appendChild(th);
     cell = row.insertCell(-1);
+	cell.innerHTML = 'Depth Chart';
+	cell = row.insertCell(-1);
     cell.classList.add('depthchart');
 
 	if (dc != null) {
 		tbl.team = dc.team;
-		th.innerHTML = dc.team;
-		cell.innerHTML = 'Bye: ' + teamByes[dc.team];
+		th.innerHTML = dc.team
+		cell.innerHTML = 'Bye: Week ' + teamByes[dc.team];
 	} else {
 		tbl.team = null;
 		th.innerHTML = "Team";
@@ -290,6 +292,12 @@ function addDepthChart(dc){
 				cell = row.insertCell(-1);
 				cell.innerHTML = name;
 				cell.classList.add('depthchart');
+				let arr = playerData.filter(
+					function(value, index, array) { return value.name == name; }
+				);
+				if (arr.length > 0) {
+					cell.addEventListener("click", function() { selectPlayer(arr[0]); });
+				}
 			}
 		}
     }

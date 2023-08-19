@@ -3,6 +3,7 @@ body {
 
 div {
     border-style: solid;
+	padding: 10px;
     overflow: auto;
     max-height: 600px;
 }
@@ -27,7 +28,7 @@ div {
 }
 
 #s_depthchart {
-	height: 30vh;
+	height: 20vh;
 }
 
 #s_myteam {
