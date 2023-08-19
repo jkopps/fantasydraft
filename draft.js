@@ -26,7 +26,7 @@ function filterPlayerList(){
     }
 
     for (row of document.getElementById('players').rows){
-	p = row.player;
+	const p = row.player;
 	var show = filters[p.pos];
 	if (filters['unavailable'] == false && row.classList.contains("unavailable")){
 	    show = false;
@@ -296,7 +296,11 @@ function addDepthChart(dc){
 					function(value, index, array) { return value.name == name; }
 				);
 				if (arr.length > 0) {
-					cell.addEventListener("click", function() { selectPlayer(arr[0]); });
+					cell.addEventListener("click", function() {
+						const p = arr[0];
+						scrollToPlayer(p);
+						selectPlayer(p);
+					});
 				}
 			}
 		}
@@ -321,6 +325,14 @@ function getPlayerByName(name) {
 				});
 }
 
+function scrollToPlayer(p) {
+	console.log('Scrolling to player ' + p.name + ', rank ' + p.rank)
+	const rows = document.getElementById('players').rows;
+	const height = rows[1].getBoundingClientRect().top -
+		  rows[0].getBoundingClientRect().top;
+	document.getElementById('s_players').scrollTop=height*(p.rank-10);
+}
+
 function initializeDraft(){
     playerData.forEach(addPlayer);
 	addDepthChart(null);
@@ -336,13 +348,9 @@ function initializeDraft(){
 	    console.log("searchbar:input: " + val);
 	    p = getPlayerByName(val);
 	    if (p) {
-		selectPlayer(getPlayerByName(val));
-		rows = document.getElementById('players').rows;
-		height = rows[1].getBoundingClientRect().top -
-		    rows[0].getBoundingClientRect().top;
-		console.log("height:" + height);
-		rank=p.rank;
-		document.getElementById('s_players').scrollTop=height*(rank-10);
+			console.log('Found player ' + p.name);
+			scrollToPlayer(p);
+			selectPlayer(p);
 	    }
 	});
 
@@ -374,3 +382,6 @@ function initializeDraft(){
     document.getElementById('isAvailable').addEventListener("click", updatePlayerAvailability);
     document.getElementById('isOnMyTeam').addEventListener("click", updatePlayerMyTeam);
 }
+
+/** @todo Reorganize player details pane to make more room for notes */
+/** @todo Add tier bars in player list */
