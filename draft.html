@@ -12,10 +12,10 @@
     <script src="./draft.js"></script>
   
 </head>
-<body onload="initializeDraft()">
+<body onload="initializeDraft()" class="flex-container-row">
 
-  <section class="left">
-  <div class="header">
+  <section class="flex-container-col flex-less">
+  <div class="flex-less"">
     <label for="playerSearch">Player:</label>
     <input list="playersList" 
 	   id="playerSearch" 
@@ -33,7 +33,7 @@
     </datalist>
   </div>
 
-  <div>
+  <div class="flex-less">
     <input type="button" id="filter_clear" value="All" onclick="filterSelectAll()">
 	<button id='filter_qb' type="button">QB</button>
 	<button id='filter_rb' type="button">RB</button>
@@ -46,13 +46,13 @@
     <label for="filter_available">Show unavailable</label>
   </div>
   
-  <div id="s_players">
+  <div id="s_players" class="flex-more">
     <table id="players"></table>
   </div>
   </section>
   
-  <section class="right">
-	<div id="s_playerdetails">
+  <section class="flex-container-col flex-more" >
+	<div id="s_playerdetails" class="flex-more">
 	  <button id='isAvailable' type='button'>Available</button>
 	  <button id='isOnMyTeam' type='button'>On My Team</button>
 	  
@@ -62,11 +62,11 @@
     <p id="playerNotes">Notes</p>
   </div>
   
-  <div id="s_depthchart">
+  <div id="s_depthchart" class="flex-less">
 	<!-- charts generated programatically -->
   </div>
 
-  <div id="s_myteam">
+  <div id="s_myteam" class="flex-less">
     <p>My Team</p>
     <table id="myteam"></table>
   </div>

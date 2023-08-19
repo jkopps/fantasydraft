@@ -1,43 +1,50 @@
-body {
+section {
+	height: 100vh;
 }
 
 div {
     border-style: solid;
 	padding: 10px;
-    overflow: auto;
-    max-height: 600px;
+	overflow: auto;
 }
 
-.header {
+.flex-container-row, .flex-container-col {
+	display: flex;
+	box-sizing: border-box;
+	padding: 10px;
+	margin: 0;
 }
 
-.left {
-      float: left;
-      width: 38%;
-      height: 100%;
+.flex-container-row {
+	flex-direction: row;
+	min-width: 100%;
 }
 
-.right {
-       float: right;
-       width: 60%;
-	   overflow: auto;
+.flex-container-col {
+	flex-direction: column;
+	min-height: 100%;
 }
 
-#s_playerdetails {
-    height: 42vh;
+section.flex-less {
+	width: min-width;
+	max-width: 40vw;
+	max-height: 100%;
 }
 
-#s_depthchart {
-	height: 20vh;
+section.flex-more {
+	flex: 1;
 }
 
-#s_myteam {
-	height: 28vh;
+div.flex-less {
+	height: min-height;
+	max-height: 30vh;
+	max-width: 100%;
 }
 
-#s_players {
-
+div.flex-more {
+	flex: 1;
 }
+
 
 th, td {
     vertical-align: top;
@@ -45,10 +52,6 @@ th, td {
 
 tr.depthchart {
     border-bottom: 1px solid black;
-}
-
-.player {
-
 }
 
 
