@@ -361,9 +361,12 @@ function getPlayerByName(name) {
 function scrollToPlayer(p) {
 	console.log('Scrolling to player ' + p.name + ', rank ' + p.rank)
 	const rows = document.getElementById('players').rows;
+	const offset = document.getElementById('s_players').getBoundingClientRect().height/2;
 	const height = rows[1].getBoundingClientRect().top -
 		  rows[0].getBoundingClientRect().top;
-	document.getElementById('s_players').scrollTop=height*(p.rank-10);
+	document.getElementById('s_players').scrollTop=(p.row.getBoundingClientRect().top
+													- rows[0].getBoundingClientRect().top
+													- offset);
 }
 
 function initializeDraft(){
@@ -418,6 +421,3 @@ function initializeDraft(){
     document.getElementById('isAvailable').addEventListener("click", updatePlayerAvailability);
     document.getElementById('isOnMyTeam').addEventListener("click", updatePlayerMyTeam);
 }
-
-/** @todo Add tier bars in player list */
-/** @todo Scroll to player does not account for which ranks are displayed */
