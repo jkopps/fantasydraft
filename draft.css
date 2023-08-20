@@ -153,35 +153,16 @@ header {
 	display: none;
 }
 
-.icon::before {
-	display: inline-block;
-	text-rendering: auto;
-	-webkit-font-smoothing: antialiased;
-	font: var(--fa-font-solid);
+.switch:checked + label > .hiddenWhenChecked {
+	display: none;
 }
 
-#hide_unavailable + .icon::before {
-	content: "\f06e"; /* fa-eye */
+.switch + label > .displayedWhenChecked {
+	display: none;
 }
 
-#hide_unavailable:checked + .icon::before{
-	content: "\f070"; /* fa-eye-slash */
-}
-
-#isAvailable + .icon::before {
-	content: "\f506"; /* fa-user-slash */
-}
-
-#isAvailable:checked + .icon::before{
-	content: "\f007"; /* fa-user */
-}
-
-#isOnMyTeam + .icon::before {
-	content: "\e073"; /* fa-users-slash */
-}
-
-#isOnMyTeam:checked + .icon::before{
-	content: "\f0c0"; /* fa-users */
+.switch:checked + label > .displayedWhenChecked {
+	display: initial;
 }
 
 .checkbox-container {
@@ -191,6 +172,10 @@ header {
 	transition: background-color 0.3s;
 	align-items: center;
 	justify-content: center;
+}
+
+#hide_unavailable_container {
+	padding: 0px;
 }
 
 .checkbox-container:hover {

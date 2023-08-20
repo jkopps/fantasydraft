@@ -44,8 +44,13 @@
 	<button id='filter_te' type="button">TE</button>
 	<button id='filter_dst' type="button">DST</button>
 	<button id='filter_k' type="button">K</button>
-	<input class="switch" type="checkbox" id="hide_unavailable" checked>
-	<label for="hide_unavailable" class="icon" title="Hide Unavailable"></label>
+	<div class="checkbox-container" id="hide_unavailable_container">
+	  <input class="switch" type="checkbox" id="hide_unavailable" checked>
+	  <label for="hide_unavailable" class="fa-stack fa-1x" title="Hide Unavailable">
+		<i class="icon fa-solid fa-eye fa-stack-1x"></i>
+		<i class="icon fa-solid fa-slash fa-stack-1x displayedWhenChecked"></i>
+	  </label>
+	</div>
   </div>
   
   <div id="s_players" class="flex-more">
@@ -59,12 +64,18 @@
 	  <header>
 	  <div class="checkbox-container">
 		<input class="switch" type="checkbox" id="isAvailable">
-		<label for="isAvailable" class="icon" title="Player is Available">
+		<label for="isAvailable" class="fa-stack fa-2x" title="Player is Available">
+		  <i class="icon fa-solid fa-hand fa-stack-1x"></i>
+		  <i class="icon fa-solid fa-slash fa-stack-2x hiddenWhenChecked"></i>
+		</label>
 	  </div>
 
 	  <div class="checkbox-container">
 		<input class="switch" type="checkbox" id="isOnMyTeam">
-		<label for="isOnMyTeam" class="icon" title="Player is On My Team">
+		<label for="isOnMyTeam" class="fa-stack fa-2x" title="Player is On My Team">
+		  <i class="icon fa-solid fa-users fa-stack-1x"></i>
+		  <i class="icon fa-solid fa-slash fa-stack-2x hiddenWhenChecked"></i>
+		</label>
 	  </div>
 	</header>
 
