@@ -28,8 +28,11 @@ function filterPlayerList(){
 		unavailable:document.getElementById('filter_unavailable').checked
     }
 
-    for (row of document.getElementById('players').rows){
-	const p = row.player;
+    for (let row of document.getElementById('players').rows){
+		const p = row.player;
+		if (p == null) {
+			continue;
+		}
 	var show = filters[p.pos];
 	if (filters['unavailable'] == false && row.classList.contains("unavailable")){
 	    show = false;
