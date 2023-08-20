@@ -62,48 +62,49 @@
 	<div id="s_playerdetails" class="flex-more">
 
 	  <header>
-	  <div class="checkbox-container">
-		<input class="switch" type="checkbox" id="isAvailable">
-		<label for="isAvailable" class="fa-stack fa-2x" title="Player is Available">
-		  <i class="icon fa-solid fa-hand fa-stack-1x"></i>
-		  <i class="icon fa-solid fa-slash fa-stack-2x hiddenWhenChecked"></i>
+		<div class="checkbox-container">
+		  <input class="switch" type="checkbox" id="isAvailable">
+		  <label for="isAvailable" class="fa-stack fa-2x" title="Player is Available">
+			<i class="icon fa-solid fa-hand fa-stack-1x"></i>
+			<i class="icon fa-solid fa-slash fa-stack-2x hiddenWhenChecked"></i>
 		</label>
-	  </div>
+		</div>
+		
+		<div class="checkbox-container">
+		  <input class="switch" type="checkbox" id="isOnMyTeam">
+		  <label for="isOnMyTeam" class="fa-stack fa-2x" title="Player is On My Team">
+			<i class="icon fa-solid fa-users fa-stack-1x"></i>
+			<i class="icon fa-solid fa-slash fa-stack-2x hiddenWhenChecked"></i>
+		  </label>
+		</div>
+	  </header>
 
-	  <div class="checkbox-container">
-		<input class="switch" type="checkbox" id="isOnMyTeam">
-		<label for="isOnMyTeam" class="fa-stack fa-2x" title="Player is On My Team">
-		  <i class="icon fa-solid fa-users fa-stack-1x"></i>
-		  <i class="icon fa-solid fa-slash fa-stack-2x hiddenWhenChecked"></i>
-		</label>
-	  </div>
-	</header>
-
-	  <p class="placeholder">
-		<em>Select Player</em>
-	  </p>
-
-	  <p class="waits">
+	  <div>
+		<p class="placeholder">
+		  <em>Select Player</em>
+		</p>
+		
+		<p class="waits">
 		<i id="playerName">The Player</i>
 		<i id="playerPosition"></i>
 		<i id="playerTeam">###</i>
-	  </p>
-	  <table class="waits">
-		<tr>
-		  <th id="playerRank"></td> <td>overall</td>
-		  <td>High: <i id="playerHigh"></i>,
-			Low: <i id="playerLow"></i>,
-			StdDev: <i id="playerStdDev"></i>
-		  </td>
-		</tr>
-		<tr>
-		  <th id="positionRank"></th><td>in position</td>
-		</tr>
+		</p>
+		<table class="waits">
+		  <tr>
+			<th id="playerRank"></th> <td>overall</td>
+			<td>High: <i id="playerHigh"></i>,
+			  Low: <i id="playerLow"></i>,
+			  StdDev: <i id="playerStdDev"></i>
+			</td>
+		  </tr>
+		  <tr>
+			<th id="positionRank"></th><td>in position</td>
+		  </tr>
           <!-- ECR vs ADP: <i id="playerEcrAdp"></i> -->
-      </table>
-
-	  <p class="waits" id="playerNotes">Notes</p>
-
+		</table>
+		
+		<p class="waits" id="playerNotes">Notes</p>
+	  </div>
   </div>
   
 <div id="s_depthchart" class="flex-less">
