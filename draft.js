@@ -79,8 +79,6 @@ function updatePlayerAvailability(){
 	console.log('Changing availability of ' + activePlayer.name);
     activePlayer.row.classList.toggle('available');
     activePlayer.row.classList.toggle('unavailable');
-	document.getElementById('isAvailable').classList.toggle('active');
-	document.getElementById('isAvailable').classList.toggle('inactive');
 }
 
 function initMyTeam(){
@@ -151,15 +149,12 @@ function updatePlayerMyTeam(){
 	}
 	console.log('Updating membership of ' + activePlayer.name);
     activePlayer.row.classList.toggle('onmyteam');
-	document.getElementById('isOnMyTeam').classList.toggle('active');
-	document.getElementById('isOnMyTeam').classList.toggle('inactive');
     displayMyTeam();
 	/* If player has joined my team, he is definitely unavailable */
 	if (activePlayer.row.classList.contains('onmyteam')) {
 		activePlayer.row.classList.add('unavailable');
 		activePlayer.row.classList.remove('available');
-		document.getElementById('isAvailable').classList.remove('active');
-		document.getElementById('isAvailable').classList.add('inactive');
+		document.getElementById('isAvailable').checked = false;
 	}
 }
 
@@ -237,19 +232,8 @@ function selectPlayer(p){
 	}
 	p.row.classList.add('selectedPlayer');
 
-	if (p.row.classList.contains('available')) {
-		console.log('Setting available active');
-		document.getElementById('isAvailable').classList.remove('inactive');
-	} else {
-		console.log('Setting available inactive');
-		document.getElementById('isAvailable').classList.add('inactive');
-	}
-
-	if (p.row.classList.contains('onmyteam')) {
-		document.getElementById('isOnMyTeam').classList.remove('inactive');
-	} else {
-		document.getElementById('isOnMyTeam').classList.add('inactive');
-	}
+	document.getElementById('isAvailable').checked = p.row.classList.contains('available');
+	document.getElementById('isOnMyTeam').checked = p.row.classList.contains('onmyteam');
 
     document.getElementById('playerName').innerHTML = p.name;
 	document.getElementById('playerTeam').innerHTML = p.team;
@@ -437,6 +421,6 @@ function initializeDraft(){
 
 	document.getElementById('hide_unavailable').addEventListener("change", filterPlayerList);
 
-    document.getElementById('isAvailable').addEventListener("click", updatePlayerAvailability);
-    document.getElementById('isOnMyTeam').addEventListener("click", updatePlayerMyTeam);
+	document.getElementById('isAvailable').addEventListener("change", updatePlayerAvailability);
+    document.getElementById('isOnMyTeam').addEventListener("change", updatePlayerMyTeam);
 }

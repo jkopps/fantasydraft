@@ -165,6 +165,21 @@ header {
 }
 
 #hide_unavailable:checked + .icon::before{
-	font: var(--fa-font-solid);
 	content: "\f070"; /* fa-eye-slash */
+}
+
+#isAvailable + .icon::before {
+	content: "\f506"; /* fa-user-slash */
+}
+
+#isAvailable:checked + .icon::before{
+	content: "\f007"; /* fa-user */
+}
+
+#isOnMyTeam + .icon::before {
+	content: "\e073"; /* fa-users-slash */
+}
+
+#isOnMyTeam:checked + .icon::before{
+	content: "\f0c0"; /* fa-users */
 }
