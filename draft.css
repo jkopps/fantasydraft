@@ -133,6 +133,10 @@ header {
 	padding-right: 8px;
 }
 
+#playerPosition {
+	padding-right: 4px;
+}
+
 .waits {
 	display: none;
 }
