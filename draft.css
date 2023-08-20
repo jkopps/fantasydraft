@@ -148,3 +148,23 @@ header {
 	position: sticky;
 	top: 0;
 }
+
+.switch {
+	display: none;
+}
+
+.icon::before {
+	display: inline-block;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	font: var(--fa-font-solid);
+}
+
+#hide_unavailable + .icon::before {
+	content: "\f06e"; /* fa-eye */
+}
+
+#hide_unavailable:checked + .icon::before{
+	font: var(--fa-font-solid);
+	content: "\f070"; /* fa-eye-slash */
+}

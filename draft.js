@@ -18,14 +18,14 @@ function displayTeamDepthChart(t) {
 
 function filterPlayerList(){
 
-    filters = {
+    const display = {
 		QB:!document.getElementById('filter_qb').classList.contains('inactive'),
 		RB:!document.getElementById('filter_rb').classList.contains('inactive'),
 		WR:!document.getElementById('filter_wr').classList.contains('inactive'),
 		TE:!document.getElementById('filter_te').classList.contains('inactive'),
 		DST:!document.getElementById('filter_dst').classList.contains('inactive'),
 		K:!document.getElementById('filter_k').classList.contains('inactive'),
-		unavailable:document.getElementById('filter_unavailable').checked
+		unavailable:!document.getElementById('hide_unavailable').checked
     }
 
     for (let row of document.getElementById('players').rows){
@@ -33,22 +33,21 @@ function filterPlayerList(){
 		if (p == null) {
 			continue;
 		}
-	var show = filters[p.pos];
-	if (filters['unavailable'] == false && row.classList.contains("unavailable")){
-	    show = false;
-	}
-	if (show){
-	    row.classList.remove("hiddenPlayer");
-	}
-	else {
-	    row.classList.add("hiddenPlayer");
-	}
+		let show = display[p.pos];
+		if (display['unavailable'] == false && row.classList.contains("unavailable")){
+			show = false;
+		}
+		if (show){
+			row.classList.remove("hiddenPlayer");
+		}
+		else {
+			row.classList.add("hiddenPlayer");
+		}
     }
-    
 }
 
 function filterSelectAll(){
-    for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k', 'unavailable']){
+    for (pos of ['qb', 'rb', 'wr', 'te', 'dst', 'k']){
 		id = 'filter_' + pos;
 		document.getElementById(id).classList.remove('inactive');
     }
@@ -74,6 +73,10 @@ function filterToggle(pos){
 }
 
 function updatePlayerAvailability(){
+	if (activePlayer == null) {
+		return;
+	}
+	console.log('Changing availability of ' + activePlayer.name);
     activePlayer.row.classList.toggle('available');
     activePlayer.row.classList.toggle('unavailable');
 	document.getElementById('isAvailable').classList.toggle('active');
@@ -143,10 +146,21 @@ function displayMyTeam(){
 }
 
 function updatePlayerMyTeam(){
+	if (activePlayer == null) {
+		return;
+	}
+	console.log('Updating membership of ' + activePlayer.name);
     activePlayer.row.classList.toggle('onmyteam');
 	document.getElementById('isOnMyTeam').classList.toggle('active');
 	document.getElementById('isOnMyTeam').classList.toggle('inactive');
     displayMyTeam();
+	/* If player has joined my team, he is definitely unavailable */
+	if (activePlayer.row.classList.contains('onmyteam')) {
+		activePlayer.row.classList.add('unavailable');
+		activePlayer.row.classList.remove('available');
+		document.getElementById('isAvailable').classList.remove('active');
+		document.getElementById('isAvailable').classList.add('inactive');
+	}
 }
 
 function highlightPlayerOverlap(){
@@ -174,13 +188,17 @@ function highlightPlayerOverlap(){
 }
 
 function clearPlayerDisplay(){
-    document.getElementById('playerName').innerHTML = "The Player";
-    document.getElementById('playerRank').innerHTML = "###";
-	document.getElementById('playerHigh').innerHTML = "###";
-	document.getElementById('playerLow').innerHTML = "###";
-	document.getElementById('playerStdDev').innerHTML = "##.#"
+	activePlayer = null;
+    document.getElementById('playerName').innerHTML = "";
+	document.getElementById('playerPosition').innerHTML = "";
+	document.getElementById('playerTeam').innerHTML = "";
+    document.getElementById('playerRank').innerHTML = "";
+	document.getElementById('playerHigh').innerHTML = "";
+	document.getElementById('playerLow').innerHTML = "";
+	document.getElementById('playerStdDev').innerHTML = ""
 	/* document.getElementById('playerEcrAdp').innerHTML = "##"; */
-	document.getElementById('playerTier').innerHTML = "##";
+	/* document.getElementById('playerTier').innerHTML = "##"; */
+	document.getElementById('positionRank').innerHTML = "";
     document.getElementById('playerNotes').innerHTML = "";
 }
 
@@ -417,7 +435,8 @@ function initializeDraft(){
 	document.getElementById('filter_dst').addEventListener("dblclick", function () { filterSelectOne('dst'); });
 	document.getElementById('filter_k').addEventListener("dblclick", function () { filterSelectOne('k'); });
 
-	document.getElementById('filter_unavailable').addEventListener("click", filterPlayerList);
+	document.getElementById('hide_unavailable').addEventListener("change", filterPlayerList);
+
     document.getElementById('isAvailable').addEventListener("click", updatePlayerAvailability);
     document.getElementById('isOnMyTeam').addEventListener("click", updatePlayerMyTeam);
 }
