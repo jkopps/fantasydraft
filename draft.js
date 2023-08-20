@@ -250,6 +250,18 @@ function addPlayer(p){
 	p.posrank = positionRanks[p.pos];
 	
     players = document.getElementById('players');
+	let tier = p.tier;
+
+	/* Add Tier row if necessary */
+	let nrows = players.rows.length
+	if (nrows == 0 || players.rows[nrows-1].player.tier < p.tier) {
+		row = players.insertRow(-1);
+		cell = row.insertCell(-1);
+		cell.colSpan = 5;
+		cell.classList.add("tier-divider");
+		cell.innerHTML = "Tier " + tier;
+	}
+	
     row = players.insertRow(-1);
     row.player = p;
     row.classList.add('playerListEntry');

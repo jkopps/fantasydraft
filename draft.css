@@ -140,3 +140,9 @@ header {
 .waits {
 	display: none;
 }
+
+.tier-divider {
+	color: white;
+	background-color: black;
+	text-align: center;
+}
