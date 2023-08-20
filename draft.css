@@ -5,7 +5,6 @@ body {
 section {
 	height: 99vh;
 	margin: 8px 2px 8px 2px;
-
 }
 
 div.flex-less, div.flex-more {
@@ -126,6 +125,9 @@ header {
 	border-bottom: 1px solid black;
 	padding-bottom: 4px;
 	margin-bottom: 8px;
+	position: sticky;
+	top: 0;
+	background-color: white;
 }
 
 #playerName {
