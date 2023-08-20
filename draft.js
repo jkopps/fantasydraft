@@ -423,4 +423,21 @@ function initializeDraft(){
 
 	document.getElementById('isAvailable').addEventListener("change", updatePlayerAvailability);
     document.getElementById('isOnMyTeam').addEventListener("change", updatePlayerMyTeam);
+
+	const containers = document.getElementsByClassName('checkbox-container');
+	for (let i=0; i < containers.length; i++) {
+		const container = containers[i];
+		const elt = container.querySelector('input');
+		if (elt == null) {
+			continue;
+		}
+		container.addEventListener(
+			"click",
+			function() {
+				let event = new Event('change');
+				elt.checked = !elt.checked;
+				elt.dispatchEvent(event);
+			}
+		);
+	}
 }

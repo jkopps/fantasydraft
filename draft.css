@@ -8,7 +8,7 @@ section {
 
 }
 
-div {
+div.flex-less, div.flex-more {
     border-style: solid;
 	padding: 10px;
 	overflow: auto;
@@ -182,4 +182,17 @@ header {
 
 #isOnMyTeam:checked + .icon::before{
 	content: "\f0c0"; /* fa-users */
+}
+
+.checkbox-container {
+	display: inline-block;
+	padding: 10px 40px 10px 40px;
+	background-color: transparent;
+	transition: background-color 0.3s;
+	align-items: center;
+	justify-content: center;
+}
+
+.checkbox-container:hover {
+	background-color: #d0d0d0
 }
