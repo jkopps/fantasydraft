@@ -441,5 +441,3 @@ function initializeDraft(){
 		);
 	}
 }
-
-/** @todo: Make icons lighten when unselected */
