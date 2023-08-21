@@ -166,12 +166,6 @@ function highlightPlayerOverlap(){
 
     for (cell of document.getElementsByClassName('myteamplayer')){
 	myPlayer = cell.player;
-	if (myPlayer.pos == activePlayer.pos){
-	    cell.classList.add('activePosition');
-	}
-	else {
-	    cell.classList.remove('activePosition');
-	}
 
 	if (teamByes[myPlayer.team] == teamByes[activePlayer.team]){
 	    cell.classList.add('activeByeWeek');

@@ -90,17 +90,14 @@ tr.depthchart {
 	font-weight: bold;
 }
 
-.activePosition {
-    font-weight: bold;
-}
-
 .activeByeWeek {
 	color: white;
-	background-color: black;
+	background-color: silver;
 }
 
 .prospectiveteamplayer {
     font-style: oblique;
+	font-weight: bold;
 	color: gray;
 }
 
