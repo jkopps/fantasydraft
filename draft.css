@@ -95,11 +95,13 @@ tr.depthchart {
 }
 
 .activeByeWeek {
-    color: red;
+	color: white;
+	background-color: black;
 }
 
 .prospectiveteamplayer {
-    color: orange;
+    font-style: oblique;
+	color: gray;
 }
 
 .eventier {
