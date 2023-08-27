@@ -278,6 +278,8 @@ function addPlayer(p){
     /* row.insertCell(-1).innerHTML = p.tier; */
     row.insertCell(-1).innerHTML = p.team;
     row.insertCell(-1).innerHTML = p.name;
+    
+    row.insertCell(-1).innerHTML = p.tags;
 
     p.row = row;
 
